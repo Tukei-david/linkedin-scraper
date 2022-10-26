@@ -68,17 +68,6 @@ def getProfileURLs(companyName):
             invisibleEmployeeList.append(profilepiclink)
     return (visibleEmployeesList[5:], invisibleEmployeeList)
 
-# Testing spreadsheet of urls
-# profilesToSearch = pd.DataFrame(columns=["ProfileID", "Title", "ProfilePicLink"])
-# company = 'apple'
-# searchable = getProfileURLs(company)
-#
-# for profileId in searchable[0]:
-#     profilesToSearch.loc[len(profilesToSearch.index)] = [profileId, "", ""]
-# for i in range(0, len(searchable[1]), 2):
-#     profilesToSearch.loc[len(profilesToSearch.index)] = ["", searchable[1][i], searchable[1][i+1]]
-
-
 # parses a type 2 job row
 def parseType2Jobs(alltext):
     jobgroups = []
@@ -134,21 +123,8 @@ def returnProfileInfo(employeeLink, companyName):
 
     for x in experiences[1:]:
         alltext = x.getText().split('\n')
+        print(alltext)
 
-        df = pd.DataFrame({
-            'Name': {
-                alltext[0]
-            }
-        })
-
-        datatoexcel = pd.ExcelWriter('Link.xlsx', engine='xlsxwriter')
-        df.to_excel(datatoexcel)
-
-        datatoexcel.close()
-
-
-        # print(alltext[0])
-        # print(alltext[1])
         startIdentifier = 0
 
         for e in alltext:
@@ -191,7 +167,7 @@ def returnProfileInfo(employeeLink, companyName):
 
 
 if __name__ == "__main__":
-    companies = ['microsoft'] #,'apple', 'microsoft', 'amazon', 'tesla-motors', 'google', 'nvidia', 'berkshire-hathaway', 'meta', 'unitedhealth-group'
+    companies = ['amazon', 'apple', 'microsoft', 'tesla-motors', 'google', 'nvidia', 'berkshire-hathaway', 'meta', 'unitedhealth-group']
     login()
     employees = {}
     for company in companies:
